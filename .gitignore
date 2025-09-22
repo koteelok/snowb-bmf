@@ -29,3 +29,5 @@ package-lock.json
 
 /test
 .sentryclirc
+.yarnrc.yml
+.yarn/install-state.gz

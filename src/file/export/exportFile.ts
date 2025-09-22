@@ -3,26 +3,19 @@ import JSZip from 'jszip'
 import { Project } from 'src/store'
 import drawPackCanvas from 'src/utils/drawPackCanvas'
 
-import toBmfInfo from './toBmfInfo'
-import { ConfigItem } from './type'
+import toInfo from './toBmfInfo'
 
 export default function exportFile(
   project: Project,
-  config: ConfigItem,
   fontName: string,
   fileName: string,
 ): void {
   const zip = new JSZip()
   const { packCanvas, glyphList, name, layout, ui } = project
-  const bmfont = toBmfInfo(project, fontName)
-  let text = config.getString(bmfont)
+  const bmfont = toInfo(project, fontName)
   const saveFileName = fileName || name
 
-  if (name !== saveFileName) {
-    text = text.replace(`file="${name}.png"`, `file="${saveFileName}.png"`)
-  }
-
-  zip.file(`${saveFileName}.${config.ext}`, text)
+  zip.file(`${saveFileName}.json`, JSON.stringify(bmfont))
 
   const canvas = document.createElement('canvas')
   canvas.width = ui.width
