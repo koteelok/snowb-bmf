@@ -65,9 +65,8 @@ export default function toInfo(project: Project, fontFamily = '') {
     info: {
       fontSize: style.font.size,
       lineHeight: Math.round(style.font.size * style.font.lineHeight),
-      base: Math.round(style.font.alphabetic - style.font.top),
-      minBaseLine: style.font.minBaseLine,
-      maxBaseLine: style.font.maxBaseLine,
+      baseline: Math.round(style.font.alphabetic - style.font.top),
+      decender: Math.abs(style.font.top - style.font.bottom),
     },
     chars,
     kernings,
